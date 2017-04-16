@@ -9,7 +9,7 @@ def hello():
     host = request.headers.get('remote_addr')
     if not host:
         host = request.remote_addr
-    if not db.ips.find({"ip": host}):
+    if not db.ips.find_one({"ip": host}):
         print db.ips.insert({"ip": host})
     for ip in db.ips.find():
         print ip["ip"]
