@@ -6,9 +6,11 @@ module = Blueprint(__name__.split('.')[-1], __name__)
 
 @module.route("/")
 def hello():
-    host = request.remote_addr
+    host = request.headers.get('remote_addr')
+    if not host:
+        host = request.remote_addr
     if not db.ips.find({"ip": host}):
         print db.ips.insert({"ip": host})
     for ip in db.ips.find():
-    	print ip["ip"]
-    return render_template("home/index.html", host=host,hosts = db.ips.find())
+        print ip["ip"]
+    return render_template("home/index.html", host=host, hosts=db.ips.find())
