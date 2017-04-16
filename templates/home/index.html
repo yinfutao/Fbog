@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block body %}
+	<ul class=entries>
+  		<h1>your ipaddress is</h1>
+  		<h2>{{host}}</h2>
+  		<h1>all access ipaddresses:</h1>
+  		{%for ip in hosts %}
+	  		<li>{{ip.get("ip")}}</li>
+		{% endfor %}
+ 	</ul>
+{% endblock %}
